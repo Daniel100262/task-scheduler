@@ -6,28 +6,20 @@ var list = document.querySelector('input');
 
 var itemsList = [];
 
-var checkbox = document.querySelector("input[name=checkbox]");
-
-
-
-//loadTaskListFromLocalStorage();
-
-list.addEventListener('click', function(ev) {
-      ev.target.classList.toggle('checked');
-  }, false);
-  
-
-
 btnSave.addEventListener("click", function(){
     addTaskToList(txtTaskName.value);
 });
 
+loadTaskListFromLocalStorage();
+
+
 function addTaskToList(taskName){
+
     if(taskName){
         
         var label = document.createElement("label");
         var checkbox = document.createElement("input");
-        //var taskDescription = document.createTextNode(taskName);
+        var taskDescription = document.createTextNode(taskName);
         
         var deleteButton = document.createElement("button");
 
@@ -73,39 +65,90 @@ function addTaskToList(taskName){
         txtTaskName.value = "";
         txtTaskName.focus;
 
+        if(typeof taskName === "object"){
+            NewTask = taskName.name;
+            
+            console.log(NewTask);
+        } else {
+            var id = geraIdAleatorio();
+        }
+
+        
+
+
+        itemsList.push({ id: id, name:taskName, checked:false });
+
+        //console.log(itemsList);
+
+
+
+        saveListToLocalStorage(itemsList);
+
         //document.querySelector("#divTasksAdded").appendChild(taskNameOnList);
     } else {
         alert("Nome da tarefa não pode estar vazio!")
     }
 }
 
-function apagarTarefa(){
+function apagarTarefa(taskName){
     console.log("tentei apagar")
-    var botoesFechar = document.querySelectorAll("#btnApagar");
-    for (i = 0; i < botoesFechar.length; i++) {
-        botoesFechar[i].onclick = function() { //Se houver um clique em qualquer botao dentro de botoesFechar...
-          
-        }
-      }
+    itemsList.pop
 }
 
-function concluiTarefa(){
+function concluiTarefa(taskName){
     console.log("Tentou concluir");
 }
 
-function desfazConclusaoTarefa(){
+function desfazConclusaoTarefa(taskName){
     console.log("Tentou desfazer");
 }
 
-function saveListToLocalStorage (){
-    localStorage.setItem("taskList", JSON.stringify(itemsList));
+function saveListToLocalStorage (taskListToSave){
+    localStorage.setItem("taskList", JSON.stringify(taskListToSave));
 }
 
 function loadTaskListFromLocalStorage(){
-    var localStorageTaskList = JSON.parse(localStorage.getItem("taskList"));
-    for(var i=0; i < localStorageTaskList.lenght; i++){
+
+    var localStorageTaskList = (localStorage.getItem("taskList"));
+
+    localStorageTaskList = JSON.parse(localStorageTaskList);
+
+    for(var i=0; i < localStorageTaskList.length; i++){
         addTaskToList(localStorageTaskList[i]);
     }
 }
 
+function geraIdAleatorio(){
+    return ((Math.random())*1000).toString(8).substring(10);
+}
 
+
+function task(){
+    var id;
+    var taskName;
+    var checked;
+
+    this.getId = function(){
+        return id;
+    }
+
+    this.getTaskName = function(){
+        return taskName;
+    }
+
+    this.getChecked = function(){
+        return checked;
+    }
+
+    this.setId = function(value){
+        id = value;
+    }
+
+    this.setTaskName = function(value){
+        taskName = value;
+    }
+
+    this.setChecked = function(value){
+        checked = value;
+    }
+}
