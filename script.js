@@ -36,8 +36,9 @@ function addTaskToList(newOrExistentTask, isNewTask) {
     checkbox.setAttribute('class', 'form-check-input me-2');
     var taskDescription = document.createTextNode(newOrExistentTask.taskName);
     var divisoria = document.createElement("hr");
-
+    
     var deleteButton = document.createElement("button");
+    deleteButton.setAttribute('class', 'fa fa-trash btnApagar');
 
     var lineBreak = document.createElement("br");
 
@@ -46,9 +47,6 @@ function addTaskToList(newOrExistentTask, isNewTask) {
         label.style.textDecoration = "line-through";
         checkbox.setAttribute('checked', true);
     }
-
-    deleteButton.textContent = "Apagar";
-    deleteButton.setAttribute('class', 'btnApagar');
     deleteButton.setAttribute('id', newOrExistentTask.id);
 
     deleteButton.addEventListener('click', function () {

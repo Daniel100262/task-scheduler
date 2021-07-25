@@ -1,6 +1,6 @@
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-align: center;
+    
     background-image: url('https://multimedia.3m.com/mws/media/1850997O/post-it-virtual-backgrounds-murals-galore-dream-big.jpg');
 }
 
@@ -11,4 +11,18 @@ form{
 
 #checkbox{
     align-items: left;
+}
+
+.btnApagar{
+    float: right;
+    background-color:#ff5555;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn {
+ 
 }
