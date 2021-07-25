@@ -1,6 +1,5 @@
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    
     background-image: url('https://multimedia.3m.com/mws/media/1850997O/post-it-virtual-backgrounds-murals-galore-dream-big.jpg');
 }
 
@@ -21,8 +20,4 @@ form{
     padding: 12px 16px;
     font-size: 16px;
     cursor: pointer;
-}
-
-.btn {
- 
 }
