@@ -17,7 +17,7 @@ Just open the *index.html* file in any of the following browsers:
 
 ## 🛠 Tecnologies
 
-As seguintes ferramentas foram usadas na construção do projeto:
+The following tools were used in the construction of the project:
 
 - [Javascript](https://www.javascript.com/)
 - [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
