@@ -113,9 +113,20 @@ function finalizeTask(task) {
     saveListToLocalStorage(itemsList);
 }
 
-function unfinalizeTask(taskId) {
-    console.log("Tentou desfazer tarefa: "+taskId);
+function unfinalizeTask(task) {
+    console.log("Tentou desfazer tarefa: "+task.id);
+    var localStorageTaskList = JSON.parse(localStorage.getItem("taskList"));
+    var itemParaAltarar;
 
+    for (var i = 0; i < localStorageTaskList.length; i++) {
+        if (localStorageTaskList[i].id == task.id) {
+            itemParaAltarar = i;
+        }
+    }
+
+    itemsList[itemParaAltarar] = { id: task.id, name: task.taskName, checked: false };
+
+    saveListToLocalStorage(itemsList);
 }
 
 function saveListToLocalStorage(taskListToSave) {
