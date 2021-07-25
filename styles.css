@@ -1,0 +1,13 @@
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+
+form{
+    display: inline-block;
+}
+
+.checkado {
+    text-decoration: line-through;
+}
