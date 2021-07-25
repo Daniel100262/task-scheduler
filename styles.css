@@ -1,6 +1,7 @@
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
+    background-image: url('https://multimedia.3m.com/mws/media/1850997O/post-it-virtual-backgrounds-murals-galore-dream-big.jpg');
 }
 
 
@@ -8,6 +9,6 @@ form{
     display: inline-block;
 }
 
-.checkado {
-    text-decoration: line-through;
+#checkbox{
+    align-items: left;
 }

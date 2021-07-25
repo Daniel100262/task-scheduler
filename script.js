@@ -3,6 +3,11 @@ var taskList = document.querySelector("#taskList");
 var btnSave = document.querySelector("#btnSave");
 var taskListElement = document.querySelector("#taskListElement");
 var list = document.querySelector('input');
+var form = document.querySelector("#form");
+
+form.addEventListener("submit", function(event){
+    event.preventDefault();
+})
 
 var itemsList = [];
 
@@ -28,11 +33,19 @@ function addTaskToList(newOrExistentTask, isNewTask) {
 
     var label = document.createElement("label");
     var checkbox = document.createElement("input");
+    checkbox.setAttribute('class', 'form-check-input me-2');
     var taskDescription = document.createTextNode(newOrExistentTask.taskName);
+    var divisoria = document.createElement("hr");
 
     var deleteButton = document.createElement("button");
 
     var lineBreak = document.createElement("br");
+
+    if(newOrExistentTask.checked){
+        console.log("1 deles ")
+        label.style.textDecoration = "line-through";
+        checkbox.setAttribute('checked', true);
+    }
 
     deleteButton.textContent = "Apagar";
     deleteButton.setAttribute('class', 'btnApagar');
@@ -65,7 +78,9 @@ function addTaskToList(newOrExistentTask, isNewTask) {
     label.appendChild(checkbox); // add the box to the element
     label.appendChild(taskDescription);
     label.appendChild(deleteButton);
+    label.appendChild(divisoria);
     label.appendChild(lineBreak);
+    
 
     taskListElement.appendChild(label);
 
