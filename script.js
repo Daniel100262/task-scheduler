@@ -71,12 +71,13 @@ function addTaskToList(newOrExistentTask, isNewTask){
 
         deleteButton.textContent = "Apagar";
         deleteButton.setAttribute('class', 'btnApagar');
-        deleteButton.setAttribute('id', 'btnApagar')
+        deleteButton.setAttribute('id', newOrExistentTask.id);
 //        deleteButton.setAttribute('onclick', 'apagarTarefa()');
 
         deleteButton.addEventListener('click', function(){
             var div = this.parentElement;
             div.remove();
+            apagarTarefa(newOrExistentTask.id);
         })
 
         //checkbox.innerText = taskName;
@@ -119,9 +120,39 @@ function addTaskToList(newOrExistentTask, isNewTask){
         //document.querySelector("#divTasksAdded").appendChild(taskNameOnList);
 }
 
-function apagarTarefa(taskName){
-    console.log("tentei apagar")
-    itemsList.pop
+function apagarTarefa(taskId){
+
+
+    var localStorageTaskList = JSON.parse(localStorage.getItem("taskList"));
+
+    var itemParaRemover;
+
+    for(var i=0; i < localStorageTaskList.length; i++){
+
+        if(localStorageTaskList[i].id == taskId){
+            itemParaRemover = i;
+        }
+
+
+
+        //localStorage.removeItem(localStorageTaskList[i].id);
+
+        //existentTask = new taskObj(localStorageTaskList[i].id, localStorageTaskList[i].name, localStorageTaskList[i].checked);
+
+        
+    }
+
+    //remove item selected, second parameter is the number of items to delete 
+    localStorageTaskList.splice(itemParaRemover, 1);
+
+    console.log(localStorageTaskList);
+
+   // Put the object into storage
+    localStorage.setItem('taskList', JSON.stringify(localStorageTaskList));
+
+    console.log("tentei apagar: "+itemParaRemover);
+
+
 }
 
 function concluiTarefa(taskName){
