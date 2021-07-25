@@ -38,6 +38,7 @@ function addTaskToList(newOrExistentTask, isNewTask) {
     deleteButton.setAttribute('class', 'fa fa-trash btnApagar');
     deleteButton.setAttribute('data-toggle', 'modal');
     deleteButton.setAttribute('data-target', '#exampleModal');
+    deleteButton.innerText = " Deletar";
     checkbox.setAttribute('class', 'form-check-input me-2');
 
     if(newOrExistentTask.checked){
