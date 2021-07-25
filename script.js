@@ -6,20 +6,64 @@ var list = document.querySelector('input');
 
 var itemsList = [];
 
+class taskObj {
+    constructor(id, taskName, checked) {
+        this.id = id;
+        this.taskName = taskName;
+        this.checked = checked;
+    }
+
+    get id(){
+        return this._id;
+    }
+    
+    set id(value){
+        this._id = value;
+    }
+
+    get taskName(){
+        return this._taskName;
+    }
+
+    set taskName(value){
+        this._taskName = value;
+    }
+
+    get checked(){
+        return this._checked
+    }
+
+    set checked(value){
+        this._checked = value;
+    }
+
+}
+
 btnSave.addEventListener("click", function(){
-    addTaskToList(txtTaskName.value);
+
+    newTask = new taskObj();
+
+    newTask.id = geraIdAleatorio();
+    newTask.taskName = txtTaskName.value;
+    newTask.checked = false;
+
+    console.log("Salvando obj: "+newTask.taskName);
+
+    addTaskToList(newTask, true);
+
+    //addTaskToList(txtTaskName.value);
 });
 
 loadTaskListFromLocalStorage();
 
 
-function addTaskToList(taskName){
+function addTaskToList(newOrExistentTask, isNewTask){
 
-    if(taskName){
+        console.log("Nome carregado: "+newOrExistentTask.taskName);
         
         var label = document.createElement("label");
         var checkbox = document.createElement("input");
-        var taskDescription = document.createTextNode(taskName);
+        var taskDescription = document.createTextNode(newOrExistentTask.taskName);
         
         var deleteButton = document.createElement("button");
 
@@ -35,7 +79,7 @@ function addTaskToList(taskName){
             div.remove();
         })
 
-        checkbox.innerText = taskName;
+        //checkbox.innerText = taskName;
 
         checkbox.setAttribute('id', 'check');
 
@@ -52,8 +96,8 @@ function addTaskToList(taskName){
         });
 
         checkbox.type = "checkbox";
-        checkbox.name = taskName; // give it a name we can check on the server side
-        checkbox.value = taskName; // make its value "pair"
+        checkbox.name = newOrExistentTask.taskName; // give it a name we can check on the server side
+        checkbox.value = newOrExistentTask.taskName; // make its value "pair"
 
         label.appendChild(checkbox); // add the box to the element
         label.appendChild(taskDescription);
@@ -65,29 +109,14 @@ function addTaskToList(taskName){
         txtTaskName.value = "";
         txtTaskName.focus;
 
-        if(typeof taskName === "object"){
-            NewTask = taskName.name;
-            
-            console.log(NewTask);
-        } else {
-            var id = geraIdAleatorio();
-        }
+        itemsList.push({ id: newOrExistentTask.id, name:newOrExistentTask.taskName, checked:newOrExistentTask.checked });
 
-        
+        if(isNewTask){ //Impede loop
+            saveListToLocalStorage(itemsList);
+        } 
 
-
-        itemsList.push({ id: id, name:taskName, checked:false });
-
-        //console.log(itemsList);
-
-
-
-        saveListToLocalStorage(itemsList);
 
         //document.querySelector("#divTasksAdded").appendChild(taskNameOnList);
-    } else {
-        alert("Nome da tarefa não pode estar vazio!")
-    }
 }
 
 function apagarTarefa(taskName){
@@ -114,7 +143,10 @@ function loadTaskListFromLocalStorage(){
     localStorageTaskList = JSON.parse(localStorageTaskList);
 
     for(var i=0; i < localStorageTaskList.length; i++){
-        addTaskToList(localStorageTaskList[i]);
+
+        existentTask = new taskObj(localStorageTaskList[i].id, localStorageTaskList[i].name, localStorageTaskList[i].checked);
+
+        addTaskToList(existentTask,false);
     }
 }
 
@@ -123,32 +155,3 @@ function geraIdAleatorio(){
 }
 
 
-function task(){
-    var id;
-    var taskName;
-    var checked;
-
-    this.getId = function(){
-        return id;
-    }
-
-    this.getTaskName = function(){
-        return taskName;
-    }
-
-    this.getChecked = function(){
-        return checked;
-    }
-
-    this.setId = function(value){
-        id = value;
-    }
-
-    this.setTaskName = function(value){
-        taskName = value;
-    }
-
-    this.setChecked = function(value){
-        checked = value;
-    }
-}
