@@ -4,7 +4,7 @@ This is a backend-less task scheduler that can only be used with a browser.
 
 ## 🚀 Usage
 
-Just open the *index.html* file in any of the following browsers:
+Just open the *index.html* file or click [here](https://daniel100262.github.io/agenda-tarefas/) in any of the following browsers:
 
 - Chrome 50+
 - Firefox 45+
